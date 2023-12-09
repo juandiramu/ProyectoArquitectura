@@ -106,7 +106,12 @@ textarea {
   align-items: center;
   border: 1px solid black;
 }
-
+.system_word{
+  border: 1px solid black;
+  margin: 2px;
+  display: flex;
+  justify-content: center;
+}
 .container__body__principal__center__down {
   display: flex;
   flex-direction: column;

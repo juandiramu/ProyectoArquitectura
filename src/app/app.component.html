@@ -19,7 +19,7 @@
       </mat-form-field>
 
       <div class="container__body__principal__center">
-
+        <div class="system_word">Palabra del sistema</div>
         <div class="container__body__principal__center__down">
           <div class="container__body__principal__center__first-container">
             <div class="PC" >
@@ -33,7 +33,7 @@
               {{MAR+1}}
             </div>
           </div>
-          <div class="container__body__principal__center__AG" >
+          <div class="container__body__principal__center__AG" [ngClass]="{'elemento__procesador__activo': almacenGeneralEstaActivo}">
             <div>
               Banco de registros
               <br>
@@ -67,18 +67,6 @@
             IR
             <br>
             {{IR}}
-          </div>
-          <div class="container__body__principal__center__AG" [ngClass]="{'elemento__procesador__activo': almacenGeneralEstaActivo}">
-            <div>
-              Almacén general
-              <br>
-              <div>
-                Ax: {{registerBanck.A}} - Bx: {{registerBanck.B}} <br>
-                Cx: {{registerBanck.C}} - Dx: {{registerBanck.D}} <br>
-                Ex: {{registerBanck.E}} - Fx: {{registerBanck.F}} <br>
-                Gx: {{registerBanck.G}} - Hx: {{registerBanck.H}}
-              </div>
-            </div>
           </div>
         </div>
 
