@@ -11,10 +11,7 @@
 
 <body>
   <div class="container__body">
-    <header>
-      <button class="header__button" mat-raised-button color="primary" (click)="LoadAndRunInstructions()" [disabled]="!habilitarBtnEjecutar"><mat-icon>play_arrow</mat-icon>Ejecutar</button>
-    </header>
-
+    
     <div class="container__body__principal">
       <mat-form-field class="container__body__principal__input">
         <mat-label>Escribe tu código aquí</mat-label>
@@ -25,21 +22,33 @@
 
         <div class="container__body__principal__center__down">
           <div class="container__body__principal__center__first-container">
-            <div class="PC" [ngClass]="{'elemento__procesador__activo': pcEstaActivo}">
+            <div class="PC" >
               PC
               <br>
               {{PC+1}}
             </div>
-            <div class="MAR" [ngClass]="{'elemento__procesador__activo': marEstaActivo}">
+            <div class="MAR" >
               MAR
               <br>
               {{MAR+1}}
             </div>
           </div>
-          <div class="container__body__principal__center__UC" [ngClass]="{'elemento__procesador__activo': unidadControlEstaActiva}">
+          <div class="container__body__principal__center__AG" >
+            <div>
+              Banco de registros
+              <br>
+              <div class="text_bank_registers">
+                A: {{bancoRegistros.A}} - B: {{bancoRegistros.B}} <br>
+                C: {{bancoRegistros.C}} - D: {{bancoRegistros.D}} <br>
+                E: {{bancoRegistros.E}} - F: {{bancoRegistros.F}} <br>
+                G: {{bancoRegistros.G}} - H: {{bancoRegistros.H}}
+              </div>
+            </div>
+          </div>
+          <div class="container__body__principal__center__UC" >
             Unidad de control
           </div>
-          <div class="container__body__principal__center__ALU" [ngClass]="{'elemento__procesador__activo': aluEstaActiva}">
+          <div class="container__body__principal__center__ALU" >
             <div>
               <div>
                 <span>{{ALU.operando1}}</span> ***** <span>{{ALU.operando2}}</span>
@@ -49,27 +58,15 @@
               {{ALU.operacionAEjecutar}}
             </div>
           </div>
-          <div class="container__body__principal__center__MBR" [ngClass]="{'elemento__procesador__activo': mbrEstaActivo}">
+          <div class="container__body__principal__center__MBR" >
             MBR
             <br>
             {{MBR}}
           </div>
-          <div class="container__body__principal__center__IR" [ngClass]="{'elemento__procesador__activo': irEstaActivo}">
+          <div class="container__body__principal__center__IR" >
             IR
             <br>
             {{IR}}
-          </div>
-          <div class="container__body__principal__center__AG" [ngClass]="{'elemento__procesador__activo': almacenGeneralEstaActivo}">
-            <div>
-              Almacén general
-              <br>
-              <div>
-                Ax: {{bancoRegistros.A}} - Bx: {{bancoRegistros.B}} <br>
-                Cx: {{bancoRegistros.C}} - Dx: {{bancoRegistros.D}} <br>
-                Ex: {{bancoRegistros.E}} - Fx: {{bancoRegistros.F}} <br>
-                Gx: {{bancoRegistros.G}} - Hx: {{bancoRegistros.H}}
-              </div>
-            </div>
           </div>
         </div>
 
@@ -100,6 +97,9 @@
         </mat-card-content>
       </mat-card>
     </div>
+    <footer class="footer_button">
+      <button class="header__button" mat-raised-button color="warn" (click)="LoadAndRunInstructions()" [disabled]="!habilitarBtnEjecutar"><mat-icon>play_arrow</mat-icon>Ejecutar</button>
+    </footer>
   </div>
 </body>
 
