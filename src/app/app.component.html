@@ -15,7 +15,7 @@
     <div class="container__body__principal">
       <mat-form-field class="container__body__principal__input">
         <mat-label>Escribe tu código aquí</mat-label>
-        <textarea matInput [(ngModel)]="instruccionesIntroducidas"></textarea>
+        <textarea matInput [(ngModel)]="addedInstructions"></textarea>
       </mat-form-field>
 
       <div class="container__body__principal__center">
@@ -68,6 +68,18 @@
             <br>
             {{IR}}
           </div>
+          <div class="container__body__principal__center__AG" [ngClass]="{'elemento__procesador__activo': almacenGeneralEstaActivo}">
+            <div>
+              Almacén general
+              <br>
+              <div>
+                Ax: {{registerBanck.A}} - Bx: {{registerBanck.B}} <br>
+                Cx: {{registerBanck.C}} - Dx: {{registerBanck.D}} <br>
+                Ex: {{registerBanck.E}} - Fx: {{registerBanck.F}} <br>
+                Gx: {{registerBanck.G}} - Hx: {{registerBanck.H}}
+              </div>
+            </div>
+          </div>
         </div>
 
 
@@ -91,7 +103,7 @@
       <mat-card class="container__body__principal__card" [ngClass]="{'elemento__procesador__activo': memoriaEstaActiva}">
         <mat-card-title>Memoria principal</mat-card-title>
         <mat-card-content>
-          <div *ngFor="let instruccion of memoria.celdas; index as index">
+          <div *ngFor="let instruccion of memory.celdas; index as index">
             {{index+1}} - {{instruccion}}
           </div>
         </mat-card-content>
