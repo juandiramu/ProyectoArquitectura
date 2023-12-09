@@ -1,4 +1,4 @@
-export class GeneralVariables {
+export class RegisterBanck {
   A: number = 0;
   B: number = 0;
   C: number = 0;
