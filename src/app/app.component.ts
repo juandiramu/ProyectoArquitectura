@@ -8,6 +8,7 @@ import { ExecuteTaskService } from './Services/EecuteTaskService';
 import { States } from './Enums/States';
 import { OperationInstruction } from './Enums/OperationInstruction';
 import { VariableInstruction } from './Enums/InstructionVariable';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-root',
@@ -94,6 +95,8 @@ export class AppComponent {
     if (this.LineToExecute()) {
       this.PC++;
       this.ExecuteSavedInstructions();
+    }else{
+      this.computerState = States.SIN_INICIAR;
     }
   }
 
@@ -123,14 +126,14 @@ export class AppComponent {
         await this.MathInstruction(OperationInstruction.DIV, operando1, operando2, operando3);
         break;
       case OperationInstruction.MOVE:
-        await this.MoveInstruction(operando1, operando2);
+        await this.MoveInstruction(operando1, operando3);
         break;
       default:
         break;
     }
   }
 
-  private async LoadInstruction(variableAGuardar: number | VariableInstruction | undefined, numero: number | VariableInstruction | undefined): Promise<void> {
+  private async LoadInstruction( numero: number | VariableInstruction | undefined, variableAGuardar: number | VariableInstruction | undefined): Promise<void> {
     if (variableAGuardar == undefined || numero == undefined) {
       return;
     }
@@ -241,7 +244,7 @@ export class AppComponent {
       case VariableInstruction.H:
         return this.registerBanck.H;
       default:
-        return 0;
+        return variableAObtener;
     }
   }
 
@@ -339,4 +342,5 @@ export class AppComponent {
   get busControlEstaActivo(): boolean {
     return this.activeElement == ProcessorElements.BUS_CONTROL;
   }
+
 }

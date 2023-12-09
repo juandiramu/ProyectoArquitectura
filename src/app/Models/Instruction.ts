@@ -5,7 +5,7 @@ export class Instruction {
   operacion: OperationInstruction | undefined;
   operando1: number | VariableInstruction | undefined;
   operando2: number | VariableInstruction | undefined;
-  operando3: number | VariableInstruction | undefined;
+  operando3: VariableInstruction | undefined;
   textoInstruccion: string;
 
   constructor(textoInstruccion: string) {
