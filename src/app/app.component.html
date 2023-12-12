@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="app.component.css">
-  <title>Proyecto final arquitectura</title>
+  <title>Proyecto arquitectura</title>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
       </mat-form-field>
 
       <div class="container__body__principal__center">
-        <div class="system_word">Palabra del sistema</div>
+        <div class="system_word">{{error}}</div>
         <div class="container__body__principal__center__down">
           <div class="container__body__principal__center__first-container">
             <div class="PC" >
@@ -51,11 +51,9 @@
           <div class="container__body__principal__center__ALU" >
             <div>
               <div>
-                <span>{{ALU.operando1}}</span> ***** <span>{{ALU.operando2}}</span>
+                <span>{{ALU.operando1 }} </span>  {{ALU.operacionAEjecutar}}  <span> {{ALU.operando2}}</span>
               </div>
               ALU
-              <br>
-              {{ALU.operacionAEjecutar}}
             </div>
           </div>
           <div class="container__body__principal__center__MBR" >
@@ -91,7 +89,7 @@
       <mat-card class="container__body__principal__card" [ngClass]="{'elemento__procesador__activo': memoriaEstaActiva}">
         <mat-card-title>Memoria principal</mat-card-title>
         <mat-card-content>
-          <div *ngFor="let instruccion of memory.celdas; index as index">
+          <div *ngFor="let instruccion of memory.positions; index as index">
             {{index+1}} - {{instruccion}}
           </div>
         </mat-card-content>

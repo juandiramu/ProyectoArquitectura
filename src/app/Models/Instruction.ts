@@ -2,23 +2,24 @@ import { OperationInstruction } from "../Enums/OperationInstruction";
 import { VariableInstruction } from "../Enums/InstructionVariable";
 
 export class Instruction {
-  operacion: OperationInstruction | undefined;
-  operando1: number | VariableInstruction | undefined;
-  operando2: number | VariableInstruction | undefined;
-  operando3: VariableInstruction | undefined;
-  textoInstruccion: string;
+  operation: OperationInstruction | undefined;
+  eperand1: number | VariableInstruction | undefined;
+  operand2: number | VariableInstruction | undefined;
+  operand3: VariableInstruction | undefined;
+  instructionText: string;
+  error : string = "";
 
   constructor(textoInstruccion: string) {
-    this.textoInstruccion = textoInstruccion;
-    this.BreakInstruction();
+    this.instructionText = textoInstruccion;
+    this.LoadInstruction();
   }
 
-  BreakInstruction(): void {
-    let instruccionArray = this.textoInstruccion.split(" ");
-    this.operacion = this.GetOperation(instruccionArray[0]);
-    this.operando1 = this.GetOperand(instruccionArray[1]);
-    this.operando2 = this.GetOperand(instruccionArray[2]);
-    this.operando3 = this.GetOperand(instruccionArray[3]);
+  LoadInstruction(): void {
+    let instruccionArray = this.instructionText.split(" ");
+    this.operation = this.GetOperation(instruccionArray[0]);
+    this.eperand1 = this.GetOperand(instruccionArray[1]);
+    this.operand2 = this.GetOperand(instruccionArray[2]);
+    this.operand3 = this.GetOperand(instruccionArray[3]);
   }
 
   GetOperation(operacion: string): OperationInstruction | undefined {
@@ -36,13 +37,14 @@ export class Instruction {
       case "MOVE":
         return OperationInstruction.MOVE;
       default:
-        alert("Operando Inválido");
-        return undefined;
+        this.error = "operando no válido"
+        return;
     }
   }
 
   GetOperand(operando: string): number | VariableInstruction | undefined {
     if (operando == undefined) {
+      this.error = " operando inválido"
       return undefined;
     }
     switch (operando.toUpperCase()) {
@@ -68,6 +70,6 @@ export class Instruction {
   }
 
   toString(): string {
-    return this.textoInstruccion;
+    return this.instructionText;
   }
 }
