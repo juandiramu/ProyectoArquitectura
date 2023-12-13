@@ -1,17 +1,17 @@
 import { OperationInstruction } from "../Enums/OperationInstruction";
 
 export class ALU {
-  Operation: OperationInstruction | undefined;
+  operation: OperationInstruction | undefined;
   operand1: number = 0;
   operand2: number = 0;
   error : string = '';
 
-  ExecuteOperation(tipoOperacion: OperationInstruction, operando1: number, operando2: number): number {
-    this.Operation = tipoOperacion;
+  RunOperation(tipoOperacion: OperationInstruction, operando1: number, operando2: number): number {
+    this.operation = tipoOperacion;
     this.operand1 = operando1;
     this.operand2 = operando2;
 
-    switch (this.Operation) {
+    switch (this.operation) {
       case OperationInstruction.ADD:
         return this.add(operando1, operando2);
       case OperationInstruction.SUB:

@@ -227,7 +227,7 @@ export class AppComponent {
     })
     const numero1 = this.GetRegisterBank(operando1);
     const numero2 = this.GetRegisterBank(operando2);
-    const resultadoOperacion = this.ALU.ExecuteOperation(operacion, numero1, numero2);
+    const resultadoOperacion = this.ALU.RunOperation(operacion, numero1, numero2);
     if(this.ALU.error != ''){
       this.error = this.ALU.error;
     }
