@@ -8,9 +8,10 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: auto;
+  height: 100%;
   width: auto;
   overflow: hidden;
+  border: solid 4px #e6e6fa;
 }
 
 header {
@@ -26,7 +27,8 @@ header {
 .container__body {
   background-color: #7e3eae;
   border: solid 2px #e6e6fa;
-  width: 80%;
+  height: auto;
+  width: 100%;
   padding: 10px;
   box-sizing: border-box;
 }
@@ -39,7 +41,6 @@ header {
 
 .container__body__principal__input {
   width: 20%;
-  margin-bottom: 20px;
 }
 
 .container__body__principal__center {
@@ -92,12 +93,12 @@ header {
 
 .container__body__principal__buses {
   display: flex;
-  justify-content: center; /* Centro los buses */
+  justify-content: center;
   flex-direction: column;
   height: 100%;
   width: 20%;
   margin: 40px;
-  margin-top: 165px;
+  margin-top: 150px;
 }
 
 .directions,
@@ -142,6 +143,11 @@ header {
 
 .container__body__principal__card {
   color: #030303;
+}
+
+.text_memory{
+  font-size: 18px;
+  padding: 10px;
 }
 
 
