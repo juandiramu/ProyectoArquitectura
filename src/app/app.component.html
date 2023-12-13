@@ -10,33 +10,32 @@
 </head>
 
 <body>
-  <div class="container__body">
+  <header>
+    <h1>Proyecto Final Arquitectura</h1>
+  </header>
 
+  <div class="container__body">
     <div class="container__body__principal">
       <mat-form-field class="container__body__principal__input">
-        <mat-label>Escribe tu código aquí</mat-label>
+        <mat-label>Ingresa el código en este espacio.</mat-label>
         <textarea matInput [(ngModel)]="addedInstructions"></textarea>
       </mat-form-field>
 
       <div class="container__body__principal__center">
         <div class="system_word">{{error}}</div>
         <div class="container__body__principal__center__down">
-          <div class="container__body__principal__center__first-container">
-            <div class="PC" >
-              PC
-              <br>
-              {{PC+1}}
-            </div>
-            <div class="MAR" >
-              MAR
-              <br>
-              {{MAR+1}}
-            </div>
+          <div class="PC">
+            PC <br>
+            {{PC+1}}
           </div>
-          <div class="container__body__principal__center__AG" [ngClass]="{'elemento__procesador__activo': almacenGeneralEstaActivo}">
+          <div class="MAR">
+            MAR <br>
+            {{MAR+1}}
+          </div>
+          <div class="container__body__principal__center__AG"
+            [ngClass]="{'elemento__procesador__activo': almacenGeneralEstaActivo}">
             <div>
-              Banco de registros
-              <br>
+              Banco de registros <br>
               <div class="text_bank_registers">
                 A: {{registerBanck.A}} - B: {{registerBanck.B}} <br>
                 C: {{registerBanck.C}} - D: {{registerBanck.D}} <br>
@@ -45,10 +44,10 @@
               </div>
             </div>
           </div>
-          <div class="container__body__principal__center__UC" >
+          <div class="container__body__principal__center__UC">
             Unidad de control
           </div>
-          <div class="container__body__principal__center__ALU" >
+          <div class="container__body__principal__center__ALU">
             <div>
               <div>
                 <span>{{ALU.operand1}} </span>  {{ALU.operation}}  <span> {{ALU.operand2}}</span>
@@ -56,19 +55,15 @@
               ALU
             </div>
           </div>
-          <div class="container__body__principal__center__MBR" >
-            MBR
-            <br>
+          <div class="container__body__principal__center__MBR">
+            MBR <br>
             {{MBR}}
           </div>
-          <div class="container__body__principal__center__IR" >
-            IR
-            <br>
+          <div class="container__body__principal__center__IR">
+            IR <br>
             {{IR}}
           </div>
         </div>
-
-
       </div>
 
       <div class="container__body__principal__buses">
@@ -86,8 +81,8 @@
         </div>
       </div>
 
-      <mat-card class="container__body__principal__card" [ngClass]="{'elemento__procesador__activo': memoriaEstaActiva}">
-        <mat-card-title>Memoria principal</mat-card-title>
+      <mat-card class="container__body__principal__card">
+        <mat-card-title class="text_memory">Memoria principal</mat-card-title>
         <mat-card-content>
           <div *ngFor="let instruccion of memory.positions; index as index">
             {{index+1}} - {{instruccion}}
@@ -95,8 +90,12 @@
         </mat-card-content>
       </mat-card>
     </div>
+
     <footer class="footer_button">
-      <button class="header__button" mat-raised-button color="warn" (click)="LoadAndRunInstructions()" [disabled]="!habilitarBtnEjecutar"><mat-icon>play_arrow</mat-icon>Ejecutar</button>
+      <button class="header__button" mat-raised-button color="warn" (click)="LoadAndRunInstructions()"
+        [disabled]="!habilitarBtnEjecutar">
+        <mat-icon>play_arrow</mat-icon>Ejecutar
+      </button>
     </footer>
   </div>
 </body>
