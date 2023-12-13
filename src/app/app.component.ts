@@ -8,6 +8,7 @@ import { ExecuteTaskService } from './Services/EecuteTaskService';
 import { States } from './Enums/States';
 import { OperationInstruction } from './Enums/OperationInstruction';
 import { VariableInstruction } from './Enums/InstructionVariable';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ export class AppComponent {
   addedInstructions: string = '';
   activeElement: ProcessorElements;
   computerState: States;
+  error : string = 'Palabra Sistema'
 
   PC: number = 0;
   MAR: number = 0;
@@ -48,7 +50,7 @@ export class AppComponent {
   }
 
   private LineToExecute() {
-    return this.PC < this.memory.celdas.length;
+    return this.PC < this.memory.positions.length;
   }
 
   private async ExecuteSavedInstructions() {
@@ -94,17 +96,20 @@ export class AppComponent {
     if (this.LineToExecute()) {
       this.PC++;
       this.ExecuteSavedInstructions();
+    }else{
+      this.computerState = States.SIN_INICIAR;
     }
   }
 
   private async ExecuteInstruction(): Promise<void> {
     if (this.IR == undefined) {
+      this.error = "Error en la Instrucción"
       return;
     }
-    const operacion = this.IR.operacion;
-    const operando1: number | VariableInstruction | undefined = this.IR.operando1;
-    const operando2: number | VariableInstruction | undefined = this.IR.operando2;
-    const operando3: number | VariableInstruction | undefined = this.IR.operando3;
+    const operacion = this.IR.operation;
+    const operando1: number | VariableInstruction | undefined = this.IR.eperand1;
+    const operando2: number | VariableInstruction | undefined = this.IR.operand2;
+    const operando3: number | VariableInstruction | undefined = this.IR.operand3;
 
     switch (operacion) {
       case OperationInstruction.LOAD:
@@ -126,12 +131,14 @@ export class AppComponent {
         await this.MoveInstruction(operando1, operando2);
         break;
       default:
+        this.error = "Operación incorrecta"
         break;
     }
   }
 
-  private async LoadInstruction(variableAGuardar: number | VariableInstruction | undefined, numero: number | VariableInstruction | undefined): Promise<void> {
+  private async LoadInstruction( numero: number | VariableInstruction | undefined, variableAGuardar: number | VariableInstruction | undefined): Promise<void> {
     if (variableAGuardar == undefined || numero == undefined) {
+      this.error = "Variable no existe"
       return;
     }
     await this.executeTaskService.ExecuteTaskAfterTime(() => {
@@ -164,6 +171,7 @@ export class AppComponent {
           this.registerBanck.H = numero;
           break;
         default:
+          this.error = "Variable no existe"
           break;
       }
     })
@@ -171,7 +179,10 @@ export class AppComponent {
 
   private async MathInstruction(tipoOperacion: OperationInstruction, primeraVariable: number | VariableInstruction | undefined, segundaVariable: number | VariableInstruction | undefined, variableDestino: number | VariableInstruction | undefined): Promise<void> {
     if (primeraVariable == undefined || segundaVariable == undefined) {
-      return;
+      this.error = "Variable no definida";
+    }
+    if(variableDestino == undefined){
+      variableDestino = segundaVariable;
     }
     switch(variableDestino) {
       case VariableInstruction.A:
@@ -199,13 +210,14 @@ export class AppComponent {
         this.registerBanck.H = await this.AluInstruction(tipoOperacion, primeraVariable, segundaVariable);
         break;
       default:
+        this.error = "Variable no existe"
         break;
     }
   }
 
   private async AluInstruction(operacion: OperationInstruction, operando1: number | VariableInstruction | undefined, operando2: number | VariableInstruction | undefined): Promise<number> {
     if (operando1 == undefined || operando2 == undefined) {
-      return 0;
+      this.error = "Operandos no válidos"
     }
     await this.executeTaskService.ExecuteTaskAfterTime(() => {
       this.activeElement = ProcessorElements.ALU;
@@ -216,11 +228,15 @@ export class AppComponent {
     const numero1 = this.GetRegisterBank(operando1);
     const numero2 = this.GetRegisterBank(operando2);
     const resultadoOperacion = this.ALU.RunOperation(operacion, numero1, numero2);
+    if(this.ALU.error != ''){
+      this.error = this.ALU.error;
+    }
     return resultadoOperacion;
   }
 
   private GetRegisterBank(variableAObtener: number | VariableInstruction | undefined) {
     if (variableAObtener == undefined) {
+      this.error = "Variable no existe";
       return 0;
     }
     switch(variableAObtener) {
@@ -241,13 +257,14 @@ export class AppComponent {
       case VariableInstruction.H:
         return this.registerBanck.H;
       default:
-        return 0;
+        this.error = "Variable no existe";
+        return variableAObtener;
     }
   }
 
   private async MoveInstruction(variableOrigen: number | VariableInstruction | undefined, variableDestino: number | VariableInstruction | undefined): Promise<void> {
     if (variableOrigen == undefined || variableDestino == undefined) {
-      return;
+      this.error = "Variable no existe";
     }
     await this.executeTaskService.ExecuteTaskAfterTime(() => {
       this.activeElement = ProcessorElements.BANCO_REGISTROS;
@@ -278,6 +295,7 @@ export class AppComponent {
         this.registerBanck.H = this.GetRegisterBank(variableOrigen);
         break;
       default:
+        this.error = "Variable no existe";
         break;
     }
   }
@@ -339,4 +357,5 @@ export class AppComponent {
   get busControlEstaActivo(): boolean {
     return this.activeElement == ProcessorElements.BUS_CONTROL;
   }
+
 }
