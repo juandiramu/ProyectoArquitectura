@@ -94,8 +94,8 @@ export class AppComponent {
       this.activeElement = ProcessorElements.UNIDAD_CONTROL;
     })
     if (this.LineToExecute()) {
-      this.PC++;
       this.ExecuteSavedInstructions();
+      this.PC++;
     }else{
       this.computerState = States.SIN_INICIAR;
     }
@@ -103,7 +103,6 @@ export class AppComponent {
 
   private async ExecuteInstruction(): Promise<void> {
     if (this.IR == undefined) {
-      this.error = "Error en la Instrucción"
       return;
     }
     const operacion = this.IR.operation;
