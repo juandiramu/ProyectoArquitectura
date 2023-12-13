@@ -64,6 +64,9 @@ export class AppComponent {
       this.MAR = this.PC;
     })
     await this.executeTaskService.ExecuteTaskAfterTime(() => {
+      this.activeElement = ProcessorElements.BUS_CONTROL;
+    })
+    await this.executeTaskService.ExecuteTaskAfterTime(() => {
       this.activeElement = ProcessorElements.BUS_DIRECCIONES;
     })
     await this.executeTaskService.ExecuteTaskAfterTime(() => {
