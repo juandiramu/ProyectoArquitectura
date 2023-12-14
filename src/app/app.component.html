@@ -14,40 +14,40 @@
     <h1>Proyecto Final Arquitectura</h1>
   </header>
 
-  <div class="container__body">
-    <div class="container__body__principal">
-      <mat-form-field class="container__body__principal__input">
-        <mat-label>Ingresa el código en este espacio.</mat-label>
+  <div class="main-container">
+    <div class="input-container">
+      <mat-form-field class="input-field">
+        <mat-label class="input-label">Ingresa el código en este espacio.</mat-label>
         <textarea matInput [(ngModel)]="addedInstructions"></textarea>
       </mat-form-field>
 
-      <div class="container__body__principal__center">
-        <div class="system_word">{{error}}</div>
-        <div class="container__body__principal__center__down">
-          <div class="PC">
+      <div class="status-container">
+        <div class="system-message">{{error}}</div>
+        <div class="system-status">
+          <div class="program-counter">
             PC <br>
             {{PC+1}}
           </div>
-          <div class="MAR">
+          <div class="memory-address-register">
             MAR <br>
             {{MAR+1}}
           </div>
-          <div class="container__body__principal__center__AG"
-            [ngClass]="{'elemento__procesador__activo': almacenGeneralEstaActivo}">
+          <div class="general-purpose-registers"
+            [ngClass]="{'active-processor-element': registerBankIsActive}">
             <div>
               Banco de registros <br>
-              <div class="text_bank_registers">
-                A: {{registerBanck.A}} - B: {{registerBanck.B}} <br>
-                C: {{registerBanck.C}} - D: {{registerBanck.D}} <br>
-                E: {{registerBanck.E}} - F: {{registerBanck.F}} <br>
-                G: {{registerBanck.G}} - H: {{registerBanck.H}}
+              <div class="register-values">
+                A: {{registerBank.A}} - B: {{registerBank.B}} <br>
+                C: {{registerBank.C}} - D: {{registerBank.D}} <br>
+                E: {{registerBank.E}} - F: {{registerBank.F}} <br>
+                G: {{registerBank.G}} - H: {{registerBank.H}}
               </div>
             </div>
           </div>
-          <div class="container__body__principal__center__UC">
+          <div class="control-unit">
             Unidad de control
           </div>
-          <div class="container__body__principal__center__ALU">
+          <div class="arithmetic-logic-unit">
             <div>
               <div>
                 <span>{{ALU.operand1}} </span>  {{ALU.operation}}  <span> {{ALU.operand2}}</span>
@@ -55,34 +55,28 @@
               ALU
             </div>
           </div>
-          <div class="container__body__principal__center__MBR">
+          <div class="memory-buffer-register">
             MBR <br>
             {{MBR}}
           </div>
-          <div class="container__body__principal__center__IR">
+          <div class="instruction-register">
             IR <br>
             {{IR}}
           </div>
         </div>
       </div>
 
-      <div class="container__body__principal__buses">
-        <div class="buses__container">
-          <div class="directions" [ngClass]="{'elemento__procesador__activo': busDireccionesEstaActivo}"></div>
-          <div class="bus_name">Bus de direcciones</div>
-        </div>
-        <div>
-          <div class="data" [ngClass]="{'elemento__procesador__activo': busDatosEstaActivo}"></div>
-          <div class="bus_name">Bus de datos</div>
-        </div>
-        <div>
-          <div class="control" [ngClass]="{'elemento__procesador__activo': busControlEstaActivo}"></div>
-          <div class="bus_name">Bus de control</div>
-        </div>
+      <div class="buses-container">
+        <div class="address-bus" [ngClass]="{'active-processor-element': addressBusIsActive}"></div>
+        <div class="bus-name">Bus de direcciones</div>
+        <div class="data-bus" [ngClass]="{'active-processor-element': dataBusIsActive}"></div>
+        <div class="bus-name">Bus de datos</div>
+        <div class="control-bus" [ngClass]="{'active-processor-element': controlBusIsActive}"></div>
+        <div class="bus-name">Bus de control</div>
       </div>
 
-      <mat-card class="container__body__principal__card">
-        <mat-card-title class="text_memory">Memoria principal</mat-card-title>
+      <mat-card class="memory-card">
+        <mat-card-title class="memory-text">Memoria principal</mat-card-title>
         <mat-card-content>
           <div *ngFor="let instruccion of memory.positions; index as index">
             {{index+1}} - {{instruccion}}
@@ -91,9 +85,9 @@
       </mat-card>
     </div>
 
-    <footer class="footer_button">
-      <button class="header__button" mat-raised-button color="accent" (click)="LoadAndRunInstructions()"
-        [disabled]="!habilitarBtnEjecutar">
+    <footer class="footer-container">
+      <button class="start-button" mat-raised-button color="accent" (click)="LoadAndRunInstructions()"
+        [disabled]="!enableRunButton">
         <mat-icon>play_arrow</mat-icon>COMENZAR
       </button>
     </footer>

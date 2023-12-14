@@ -24,7 +24,7 @@ header {
   height: 20px;
 }
 
-.container__body {
+.main-container {
   background-color: #a778cb;
   border: solid 2px #e6e6fa;
   height: auto;
@@ -33,24 +33,24 @@ header {
   box-sizing: border-box;
 }
 
-.container__body__principal {
+.input-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
 
-.container__body__principal__input {
+.input-field {
   width: 20%;
 }
 
-.container__body__principal__center {
+.status-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   flex: 1;
 }
 
-.system_word {
+.system-message {
   background-color: #d388ff;
   padding: 10px;
   margin-bottom: 20px;
@@ -58,19 +58,20 @@ header {
   width: 80%;
 }
 
-.container__body__principal__center__down {
+.system-status {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   width: 50%;
 }
 
-.PC,
-.MAR,
-.container__body__principal__center__UC,
-.container__body__principal__center__ALU,
-.container__body__principal__center__MBR,
-.container__body__principal__center__IR {
+.program-counter,
+.memory-address-register,
+.general-purpose-registers,
+.control-unit,
+.arithmetic-logic-unit,
+.memory-buffer-register,
+.instruction-register {
   flex: 1;
   margin: 10px;
   padding: 20px;
@@ -80,18 +81,16 @@ header {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.container__body__principal__center__AG {
-  flex: 1;
-  margin: 10px;
-  padding: 40px;
-  text-align: center;
-  color: #ecf0f1;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+.general-purpose-registers {
   background-color: #d388ff;
 }
 
-.container__body__principal__buses {
+.active-processor-element {
+  border: 2px solid #f890e5;
+  box-shadow: 0px 0px 11px 0px #f80bdc;
+}
+
+.buses-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -101,9 +100,9 @@ header {
   margin-top: 150px;
 }
 
-.directions,
-.data,
-.control {
+.address-bus,
+.data-bus,
+.control-bus {
   flex: 1;
   margin: 10px;
   padding: 20px;
@@ -114,25 +113,20 @@ header {
   background-color: #e6e6fa;
 }
 
-.bus_name {
+.bus-name {
   color: #ecf0f1;
   margin-top: 10px;
   display: flex;
   justify-content: center;
 }
 
-.elemento__procesador__activo {
-  border: 2px solid #f890e5;
-  box-shadow: 0px 0px 11px 0px #f80bdc;
-}
-
-.footer_button {
+.footer-container {
   margin-top: 20px;
   width: 100%;
   text-align: center;
 }
 
-.header__button {
+.start-button {
   background-color: #e74c3c;
   color: #ecf0f1;
   padding: 10px 20px;
@@ -141,11 +135,11 @@ header {
   font-size: 16px;
 }
 
-.container__body__principal__card {
+.memory-card {
   color: #030303;
 }
 
-.text_memory{
+.memory-text {
   font-size: 18px;
   padding: 10px;
 }
